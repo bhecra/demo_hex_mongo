@@ -1,7 +1,7 @@
-import { ProductInMemory } from '../adapters/outputs/memory/ProductInMemory';
+import { ProductInMemory } from '../outputs/memory/ProductInMemory';
 //import { ProductMongoDB } from '../adapters/outputs/mongoDB/ProductMongDB';
-import { ProductPGRepository } from '../adapters/outputs/pg/product-pg.repository';
-import { IProductRepository } from './output-ports/IProductRepository';
+import { ProductPGRepository } from '../outputs/pg/product-pg.repository';
+import { IProductRepository } from '../../domain/output-ports/IProductRepository';
 
 export const productServiceProvider = (environment: string) => ({
   provide: IProductRepository,
