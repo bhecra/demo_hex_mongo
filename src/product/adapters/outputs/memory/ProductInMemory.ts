@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { ProductModel } from '../../../domain/models/product.Model';
+import { ProductModel } from '../../../domain/product.model';
 import { MemoryRepository } from 'src/core/domain/repository/memory.repository';
+import { productMockedData } from 'src/product/domain/product.data';
 
 /**
  * This is the implementation of output port, to store things in memory.
@@ -8,18 +9,6 @@ import { MemoryRepository } from 'src/core/domain/repository/memory.repository';
 @Injectable()
 export class ProductInMemory extends MemoryRepository<ProductModel> {
   constructor() {
-    super([new ProductModel(null, 'product__1', 1)]);
+    super(productMockedData);
   }
 }
-// export class ProductInMemory implements IProductRepository {
-//   private products: ProductModel[] = [new ProductModel(null, 'product__1', 1)];
-
-//   async create(product: ProductModel): Promise<ProductModel> {
-//     this.products.push(product);
-//     return product;
-//   }
-
-//   async findAll(): Promise<ProductModel[]> {
-//     return this.products;
-//   }
-// }

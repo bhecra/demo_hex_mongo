@@ -3,8 +3,7 @@ import { ProductTable } from './product.entity';
 import { IProductRepository } from '../../../domain/output-ports/IProductRepository';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { CreateProductResponseDto } from 'src/product/domain/models/dtos/create-product-response.dto';
-import { ProductModel } from 'src/product/domain/models/product.Model';
+import { ProductModel } from 'src/product/domain/product.model';
 
 @Injectable()
 export class ProductMongoDB implements Partial<IProductRepository> {
@@ -21,7 +20,7 @@ export class ProductMongoDB implements Partial<IProductRepository> {
     return this.productModel.create(product);
   }
 
-  async search(): Promise<CreateProductResponseDto[]> {
+  async search(): Promise<ProductModel[]> {
     return this.productModel.find({});
   }
 }

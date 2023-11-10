@@ -9,14 +9,12 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { validate as isUUID } from 'uuid';
 import { DataSource, Repository } from 'typeorm';
 import { ProductEntity } from './product.entity';
-import { BaseRepository } from 'src/core/domain/repository/base.repository';
-import { ProductModel } from 'src/product/domain/models/product.Model';
+import { ProductModel } from 'src/product/domain/product.model';
 import { IUbitsFilter } from 'src/core/utils';
+import { IProductRepository } from 'src/product/domain/output-ports/IProductRepository';
 
 @Injectable()
-export class ProductPGRepository
-  implements BaseRepository<ProductModel, string>
-{
+export class ProductPGRepository implements IProductRepository {
   private readonly logger = new Logger('ProductsService');
   constructor(
     @InjectRepository(ProductEntity)
