@@ -9,18 +9,19 @@ import {
 } from './adapters/outputs/mongoDB/product.entity';
 import { ProductMongoDB } from './adapters/outputs/mongoDB/ProductMongDB';
 import { ConfigModule } from '@nestjs/config';
-import { ProductProvider } from './adapters/providers/productProvider';
-// import { IProductRepository } from './domain/output-ports/IProductRepository';
+import { IProductRepository } from './domain/output-ports/IProductRepository';
+
+ConfigModule.forRoot();
+
+const configServiceProvider = {
+  provide: IProductRepository,
+  useClass:
+    process.env.ENVIRONMENT === 'local' ? ProductInMemory : ProductMongoDB,
+};
 
 @Module({
   controllers: [ProductController],
-  providers: [
-    ProductService,
-    ProductInMemory,
-    ProductMongoDB,
-    ProductProvider,
-    // { provide: IProductRepository, useClass: ProductProvider },
-  ],
+  providers: [ProductService, configServiceProvider],
   imports: [
     ConfigModule,
     MongooseModule.forFeature([
