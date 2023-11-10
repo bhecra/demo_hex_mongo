@@ -8,7 +8,7 @@ export class ProductEntity {
   @Column('text', {
     unique: true,
   })
-  title: string;
+  name: string;
 
   @Column('float')
   price: number;

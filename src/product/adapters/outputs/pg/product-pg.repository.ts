@@ -14,7 +14,7 @@ import { ProductModel } from 'src/product/domain/models/product.Model';
 import { IUbitsFilter } from 'src/core/utils';
 
 @Injectable()
-export class ProductRepositoryAdapter
+export class ProductPGRepository
   implements BaseRepository<ProductModel, string>
 {
   private readonly logger = new Logger('ProductsService');
@@ -44,14 +44,28 @@ export class ProductRepositoryAdapter
     return product as unknown as ProductModel;
   }
   async search(options?: IUbitsFilter): Promise<ProductModel[]> {
-    const { pageFrom, pageTo } = options;
+    // Validar si options es undefined
+    if (!options) {
+      // Puedes manejar el caso cuando options es undefined, por ejemplo, estableciendo valores predeterminados.
+      options = { pageFrom: null, pageTo: null }; // Estos valores son solo ejemplos, puedes ajustarlos según tus necesidades.
+    }
 
-    const offset = pageFrom;
+    // Desestructurar options, asegurándote de que los valores sean definidos
+    const { pageFrom, pageTo } = options || {};
 
-    const products = await this.productRepository.find({
-      take: pageTo,
-      skip: offset,
-    });
+    let products;
+
+    if (pageFrom && pageTo) {
+      const offset = pageFrom || 0;
+      const take = pageTo || 10; // Por ejemplo, 10 es un valor predeterminado
+
+      products = await this.productRepository.find({
+        take: take,
+        skip: offset,
+      });
+    } else {
+      products = await this.productRepository.find();
+    }
 
     return products as unknown as ProductModel[];
   }
