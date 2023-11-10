@@ -4,8 +4,7 @@ import { IProductRepository } from '../../../domain/output-ports/IProductReposit
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CreateProductResponseDto } from 'src/product/domain/models/dtos/create-product-response.dto';
-import { CreateProductDto } from '../../dtos/create-product.dto';
-import { Product } from 'src/product/domain/models/product.entity';
+import { ProductModel } from 'src/product/domain/models/product.Model';
 
 @Injectable()
 export class ProductMongoDB implements IProductRepository {
@@ -14,7 +13,11 @@ export class ProductMongoDB implements IProductRepository {
     private productModel: Model<ProductTable>,
   ) {}
 
-  async create(product: Product): Promise<Product> {
+  // async create(product: ProductModel): Promise<ProductModel> {
+  //   return this.productModel.create(product);
+  // }
+
+  async create(product: ProductModel): Promise<ProductModel> {
     return this.productModel.create(product);
   }
 

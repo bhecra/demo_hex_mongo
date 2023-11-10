@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Product } from '../../../domain/models/product.entity';
+import { ProductModel } from '../../../domain/models/product.Model';
 import { IProductRepository } from '../../../domain/output-ports/IProductRepository';
 
 /**
@@ -7,14 +7,14 @@ import { IProductRepository } from '../../../domain/output-ports/IProductReposit
  */
 @Injectable()
 export class ProductInMemory implements IProductRepository {
-  private products: Product[] = [new Product(null, 'product__1', 1)];
+  private products: ProductModel[] = [new ProductModel(null, 'product__1', 1)];
 
-  async create(product: Product): Promise<Product> {
+  async create(product: ProductModel): Promise<ProductModel> {
     this.products.push(product);
     return product;
   }
 
-  async findAll(): Promise<Product[]> {
+  async findAll(): Promise<ProductModel[]> {
     return this.products;
   }
 }

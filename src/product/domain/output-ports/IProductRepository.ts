@@ -1,11 +1,8 @@
-import { Product } from '../models/product.entity';
+import { ProductModel } from '../models/product.Model';
 
-/**
- * Interface for Ticket Repository, outbound port
- */
 export interface IProductRepository {
-  create(product: Product): Promise<Product>;
-  findAll(): Promise<Product[]>;
+  create(product: ProductModel): Promise<ProductModel>;
+  findAll(): Promise<ProductModel[]>;
 }
 
 export const IProductRepository = Symbol('IProductRepository');

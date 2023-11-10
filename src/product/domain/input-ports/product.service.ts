@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { IProductUseCase } from './IProduct.usecase';
 import { CreateProductResponseDto } from '../models/dtos/create-product-response.dto';
-import { Product } from '../models/product.entity';
+import { ProductModel } from '../models/product.Model';
 import { IProductRepository } from '../output-ports/IProductRepository';
 
 @Injectable()
@@ -12,7 +12,7 @@ export class ProductService implements IProductUseCase {
   ) {}
 
   async create(name: string, price: number): Promise<CreateProductResponseDto> {
-    const newProduct = new Product(null, name, price);
+    const newProduct = new ProductModel(null, name, price);
     return this.productRepository.create(newProduct);
   }
 

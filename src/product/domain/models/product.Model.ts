@@ -1,6 +1,6 @@
 import { randomUUID } from 'crypto';
 
-export class Product {
+export class ProductModel {
   constructor(
     public id: string | null,
     public name: string,
