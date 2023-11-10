@@ -17,6 +17,6 @@ export class ProductService implements IProductUseCase {
   }
 
   async findAll() {
-    return this.productRepository.findAll();
+    return this.productRepository.search();
   }
 }

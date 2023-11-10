@@ -7,7 +7,7 @@ import { CreateProductResponseDto } from 'src/product/domain/models/dtos/create-
 import { ProductModel } from 'src/product/domain/models/product.Model';
 
 @Injectable()
-export class ProductMongoDB implements IProductRepository {
+export class ProductMongoDB implements Partial<IProductRepository> {
   constructor(
     @InjectModel(ProductTable.name)
     private productModel: Model<ProductTable>,
@@ -21,7 +21,7 @@ export class ProductMongoDB implements IProductRepository {
     return this.productModel.create(product);
   }
 
-  async findAll(): Promise<CreateProductResponseDto[]> {
+  async search(): Promise<CreateProductResponseDto[]> {
     return this.productModel.find({});
   }
 }
